@@ -32,6 +32,10 @@ defmodule Tetris.Tetromino do
     %{tetromino | rotation: rotate_degrees(tetromino.rotation)}
   end
 
+  def points(tetromino) do
+    [tetromino.location]
+  end
+
   # @doc Devuelve la forma del tetromino
   defp random_shape do
     ~w[i t o l j z s]a
