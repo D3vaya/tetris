@@ -1,6 +1,6 @@
 defmodule Tetris.Tetromino do
-  defstruct shape: :l, rotation: 0, location: {5, 1}
-  alias Tetris.Point
+  defstruct shape: :l, rotation: 0, location: {3, 0}
+  alias Tetris.{Point, Points}
 
   # @doc Crea un nuevo tetromino con las opciones proporcionadas
   def new(options) do
@@ -32,8 +32,75 @@ defmodule Tetris.Tetromino do
     %{tetromino | rotation: rotate_degrees(tetromino.rotation)}
   end
 
-  def points(tetromino) do
-    [tetromino.location]
+  def show(tetromino) do
+    tetromino
+    |> points()
+    |> Points.rotate(tetromino.rotation)
+    |> Points.move(tetromino.location)
+    |> Points.add_shape(tetromino.shape)
+  end
+
+  def points(%{shape: :l} = tetromino) do
+    [
+      {2, 1},
+      {2, 2},
+      {2, 3},
+      {3, 3}
+    ]
+  end
+
+  def points(%{shape: :j} = tetromino) do
+    [
+      {3, 1},
+      {3, 2},
+      {3, 3},
+      {2, 3}
+    ]
+  end
+
+  def points(%{shape: :s} = tetromino) do
+    [
+      {2, 2},
+      {3, 2},
+      {1, 3},
+      {2, 3}
+    ]
+  end
+
+  def points(%{shape: :z} = tetromino) do
+    [
+      {1, 2},
+      {2, 2},
+      {2, 3},
+      {3, 3}
+    ]
+  end
+
+  def points(%{shape: :i} = tetromino) do
+    [
+      {2, 1},
+      {2, 2},
+      {2, 3},
+      {2, 4}
+    ]
+  end
+
+  def points(%{shape: :o} = tetromino) do
+    [
+      {2, 2},
+      {3, 2},
+      {2, 3},
+      {3, 3}
+    ]
+  end
+
+  def points(%{shape: :t} = tetromino) do
+    [
+      {1, 2},
+      {2, 2},
+      {3, 2},
+      {2, 3}
+    ]
   end
 
   # @doc Devuelve la forma del tetromino
